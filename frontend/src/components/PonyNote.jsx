@@ -13,11 +13,12 @@ class PonyNote extends Component {
 
     state = {
         text: "",
+        title: "",
         updateNoteId: null,
     }
 
     resetForm = () => {
-        this.setState({text: "", updateNoteId: null});
+        this.setState({text: "",title:"", updateNoteId: null});
     }
 
     selectForEdit = (id) => {
@@ -28,7 +29,7 @@ class PonyNote extends Component {
     submitNote = (e) => {
         e.preventDefault();
         if (this.state.updateNoteId === null) {
-            this.props.addNote(this.state.text).then(this.resetForm)
+            this.props.addNote(this.state.text,this.state.title).then(this.resetForm)
         } else {
             this.props.updateNote(this.state.updateNoteId, this.state.text).then(this.resetForm);
         }
@@ -50,6 +51,13 @@ class PonyNote extends Component {
                         placeholder="Enter note here..."
                         onChange={(e) => this.setState({text: e.target.value})}
                         required />
+                    <br />
+                    <input
+                        value={this.state.title}
+                        placeholder="Enter title here..."
+                        onChange={(e) => this.setState({title: e.target.value})}
+                        required />
+
                     <button onClick={this.resetForm}>Reset</button>
                     <input type="submit" value="Save Note" />
                 </form>
@@ -84,8 +92,8 @@ const mapDispatchToProps = dispatch => {
         fetchNotes: () => {
             dispatch(notes.fetchNotes());
         },
-        addNote: (text) => {
-            return dispatch(notes.addNote(text));
+        addNote: (text,title) => {
+            return dispatch(notes.addNote(text,title));
         },
         updateNote: (id, text) => {
             return dispatch(notes.updateNote(id, text));

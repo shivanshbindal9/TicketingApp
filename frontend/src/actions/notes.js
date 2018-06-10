@@ -29,7 +29,7 @@ export const fetchNotes = () => {
     }
 }
 
-export const addNote = text => {
+export const addNote = (text, title) => {
     return (dispatch, getState) => {
         let headers = {"Content-Type": "application/json"};
         let {token} = getState().auth;
@@ -38,7 +38,7 @@ export const addNote = text => {
             headers["Authorization"] = `Token ${token}`;
         }
 
-        let body = JSON.stringify({text, });
+        let body = JSON.stringify({text,title, });
         return fetch("/api/notes/", {headers, method: "POST", body})
             .then(res => {
                 if (res.status < 500) {
