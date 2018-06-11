@@ -14,8 +14,25 @@ class PonyNote extends Component {
     state = {
         text: "",
         title: "",
+        category: "Bug Report",
+        domain: "Public",
         updateNoteId: null,
     }
+    setDomain(event) {
+    console.log(event.target.value);
+    this.setState({
+      domain:event.target.value
+      });
+
+  }
+
+    setCategory(event) {
+    console.log(event.target.value);
+    this.setState({
+      category:event.target.value
+      });
+
+  }
 
     resetForm = () => {
         this.setState({text: "",title:"", updateNoteId: null});
@@ -23,15 +40,15 @@ class PonyNote extends Component {
 
     selectForEdit = (id) => {
         let note = this.props.notes[id];
-        this.setState({text: note.text, updateNoteId: id});
+        this.setState({text: note.text, updateNoteId: id,title: note.title,category:note.category,domain:note.domain});
     }
 
     submitNote = (e) => {
         e.preventDefault();
         if (this.state.updateNoteId === null) {
-            this.props.addNote(this.state.text,this.state.title).then(this.resetForm)
+            this.props.addNote(this.state.text,this.state.title,this.state.domain,this.state.category).then(this.resetForm)
         } else {
-            this.props.updateNote(this.state.updateNoteId, this.state.text).then(this.resetForm);
+            this.props.updateNote(this.state.updateNoteId, this.state.text,this.state.title,this.state.domain,this.state.category).then(this.resetForm);
         }
     }
 
@@ -57,6 +74,22 @@ class PonyNote extends Component {
                         placeholder="Enter title here..."
                         onChange={(e) => this.setState({title: e.target.value})}
                         required />
+                    <fieldset id="group1">
+                    <div onChange={this.setDomain.bind(this)}>
+                        <input type="radio" value="Public" name="group1" defaultChecked /> Public 
+                        <input type="radio" value="Private" name="group1" /> Private
+                    </div>
+                    </fieldset>
+
+                    <fieldset id="group2">
+                    <div onChange={this.setCategory.bind(this)}>
+
+                        <input type="radio" value="Bug Report" name="group2" defaultChecked/>Bug Report
+                        <input type="radio" value="Feature Request" name="group2" />Feature Request <br />
+                        <input type="radio" value="Personnel Account Issue" name="group2" />Personnel Account Issue
+                        <input type="radio" value="Other" name="group2" />Other
+                   </div> 
+                   </fieldset>
 
                     <button onClick={this.resetForm}>Reset</button>
                     <input type="submit" value="Save Note" />
@@ -68,6 +101,10 @@ class PonyNote extends Component {
                         {this.props.notes.map((note, id) => (
                             <tr key={`note_${note.id}`}>
                                 <td>{note.text}</td>
+                                <td>{note.title}</td>
+                                <td>{note.domain}</td>
+                                <td>{note.category}</td>
+                                <td>{note.status}</td>
                                 <td><button onClick={() => this.selectForEdit(id)}>edit</button></td>
                                 <td><button onClick={() => this.props.deleteNote(id)}>delete</button></td>
                             </tr>
@@ -92,11 +129,11 @@ const mapDispatchToProps = dispatch => {
         fetchNotes: () => {
             dispatch(notes.fetchNotes());
         },
-        addNote: (text,title) => {
-            return dispatch(notes.addNote(text,title));
+        addNote: (text,title,domain,category) => {
+            return dispatch(notes.addNote(text,title,domain,category));
         },
-        updateNote: (id, text) => {
-            return dispatch(notes.updateNote(id, text));
+        updateNote: (id, text,title,domain,category) => {
+            return dispatch(notes.updateNote(id, text,title,domain,category));
         },
         deleteNote: (id) => {
             dispatch(notes.deleteNote(id));
