@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 
 import {notes, auth} from "../actions";
-
+import {Link} from "react-router-dom";
 
 
 class PonyNote extends Component {
@@ -90,10 +90,12 @@ class PonyNote extends Component {
                         <input type="radio" value="Other" name="group2" />Other
                    </div> 
                    </fieldset>
-
                     <button onClick={this.resetForm}>Reset</button>
                     <input type="submit" value="Save Note" />
                 </form>
+                <p>
+                        <Link to="/img">Go to admin view</Link>
+                </p>
 
                 <h3>Notes</h3>
                 <table>

@@ -10,6 +10,7 @@ from .serializers import (NoteSerializer, CreateUserSerializer, UserSerializer, 
 class NoteViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated, ]
     serializer_class = NoteSerializer
+    
 
     def get_queryset(self):
         return self.request.user.notes.all()
@@ -47,3 +48,10 @@ class UserAPI(generics.RetrieveAPIView):
 
     def get_object(self):
         return self.request.user
+
+
+class AllNoteViewSet(viewsets.ModelViewSet):
+    queryset = Note.objects.all()
+    permission_classes = [permissions.IsAdminUser, ]
+    serializer_class = NoteSerializer
+

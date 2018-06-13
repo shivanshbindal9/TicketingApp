@@ -1,10 +1,11 @@
 from django.conf.urls import include, url
 from rest_framework import routers
 
-from .api import NoteViewSet, RegistrationAPI, LoginAPI, UserAPI
+from .api import NoteViewSet, RegistrationAPI, LoginAPI, UserAPI, AllNoteViewSet
 
 router = routers.DefaultRouter()
 router.register('notes', NoteViewSet, 'notes')
+router.register('imgnotes', AllNoteViewSet)
 
 urlpatterns = [
     url("^", include(router.urls)),
