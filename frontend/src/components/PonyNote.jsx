@@ -106,7 +106,7 @@ class PonyNote extends Component {
                                 <td>{note.title}</td>
                                 <td>{note.domain}</td>
                                 <td>{note.category}</td>
-                                <td>{note.status}</td>
+                                <td>{note.statusi}</td>
                                 <td><button onClick={() => this.selectForEdit(id)}>edit</button></td>
                                 <td><button onClick={() => this.props.deleteNote(id)}>delete</button></td>
                             </tr>

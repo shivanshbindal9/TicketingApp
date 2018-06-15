@@ -38,10 +38,9 @@ class Note(models.Model):
         choices=DOMAIN_CHOICES,
         default='Public',
     )
-    status = models.CharField(
-        max_length=15,
-        choices=STATUS_CHOICES,
-        default='Received',
+    statusi = models.CharField(
+         max_length=16,
+         default='Received',
     )
     solved = models.BooleanField(default=False)  
     

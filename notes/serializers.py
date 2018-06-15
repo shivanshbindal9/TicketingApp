@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate
 class NoteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Note
-        fields = ('id', 'text', 'title','owner','category','domain', 'status', 'solved')
+        fields = ('id', 'text', 'title','owner','category','domain', 'statusi', 'solved')
 
 
 class CreateUserSerializer(serializers.ModelSerializer):
