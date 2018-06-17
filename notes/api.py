@@ -1,10 +1,10 @@
 from rest_framework import viewsets, permissions, generics
 from rest_framework.response import Response
-
+from django.contrib.auth.models import User
 from knox.models import AuthToken
 
 from .models import Note
-from .serializers import (NoteSerializer, CreateUserSerializer, UserSerializer, LoginUserSerializer)
+from .serializers import (NoteSerializer, CreateUserSerializer, UserSerializer, LoginUserSerializer, AllUsersSerializer)
 
 
 class NoteViewSet(viewsets.ModelViewSet):
@@ -25,6 +25,7 @@ class RegistrationAPI(generics.GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
+        user.is_staff = False
         return Response({
             "user": UserSerializer(user, context=self.get_serializer_context()).data,
             "token": AuthToken.objects.create(user)
@@ -55,3 +56,11 @@ class AllNoteViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAdminUser, ]
     serializer_class = NoteSerializer
 
+
+class AllUsers(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    permission_classes = [permissions.IsAdminUser, ]
+    serializer_class = AllUsersSerializer
+
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)

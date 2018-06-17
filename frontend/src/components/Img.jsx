@@ -44,20 +44,20 @@ class ImgNote extends Component {
        return (
            <div>
              <form onSubmit={this.submitNote}>
-                 <h5> Note Text : </h5>
+                 <p> Description : </p>
                  <input
                      value={this.state.text}
                      placeholder={this.state.text}
                      disabled />
                  <br /> 
-                 <h5> Current Status : </h5>
+                 <p> Current Status : </p>
                  <input
                      value={this.state.statusi}
                      placeholder={this.state.statusi}
                      disabled />
                   <br />
 
-                  <h4> Update To </h4>
+                  <p> Update To  : </p>
                   <fieldset id="group2">
                     <div onChange={this.setCategory.bind(this)}>
                         <input type="radio" value="Received" name="group2" defaultChecked/>Received
@@ -75,7 +75,7 @@ class ImgNote extends Component {
                  <Link to="/users">Go to all users</Link>
              </p>
 
-             <h3>Notes</h3>
+             <h3>All Tickets</h3>
                 <table>
                     <tbody>
                         {this.props.imgnotes.map((note, id) => (

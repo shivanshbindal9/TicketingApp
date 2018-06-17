@@ -55,32 +55,34 @@ class PonyNote extends Component {
     render() {
         return (
             <div>
-                <h2>Welcome to PonyNote!</h2>
+                <h2>Welcome to TicketingApp!</h2>
                 <hr />
                 <div style={{textAlign: "right"}}>
                     {this.props.user.username} (<a onClick={this.props.logout}>logout</a>)
                 </div>
 
-                <h3>Add new note</h3>
+                <h3>Add new ticket</h3>
                 <form onSubmit={this.submitNote}>
+                    <br />
+                    <input
+                        value={this.state.title}
+                        placeholder="Enter title here..."
+                        onChange={(e) => this.setState({title: e.target.value})}
+                        required /> <br />
                     <input
                         value={this.state.text}
                         placeholder="Enter note here..."
                         onChange={(e) => this.setState({text: e.target.value})}
                         required />
                     <br />
-                    <input
-                        value={this.state.title}
-                        placeholder="Enter title here..."
-                        onChange={(e) => this.setState({title: e.target.value})}
-                        required />
+                    <p> Set Domain : </p>
                     <fieldset id="group1">
                     <div onChange={this.setDomain.bind(this)}>
                         <input type="radio" value="Public" name="group1" defaultChecked /> Public 
                         <input type="radio" value="Private" name="group1" /> Private
                     </div>
                     </fieldset>
-
+                    <p> Category </p>
                     <fieldset id="group2">
                     <div onChange={this.setCategory.bind(this)}>
 
@@ -97,7 +99,7 @@ class PonyNote extends Component {
                         <Link to="/img">Go to admin view</Link>
                 </p>
 
-                <h3>Notes</h3>
+                <h3>All Tickets</h3>
                 <table>
                     <tbody>
                         {this.props.notes.map((note, id) => (
