@@ -27,7 +27,7 @@ class CreateUserSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username')
+        fields = ('id', 'username', 'is_superuser')
 
 class LoginUserSerializer(serializers.Serializer):
     username = serializers.CharField()
@@ -43,3 +43,9 @@ class AllUsersSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ( 'username', 'password', 'is_superuser','is_staff', 'id')
+
+class PublicTicketsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Note
+        fields = ('id', 'text', 'title','owner','category','domain', 'statusi', 'solved')
+

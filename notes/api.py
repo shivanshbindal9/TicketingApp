@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from knox.models import AuthToken
 
 from .models import Note
-from .serializers import (NoteSerializer, CreateUserSerializer, UserSerializer, LoginUserSerializer, AllUsersSerializer)
+from .serializers import (NoteSerializer, CreateUserSerializer, UserSerializer, LoginUserSerializer, AllUsersSerializer, PublicTicketsSerializer)
 
 
 class NoteViewSet(viewsets.ModelViewSet):
@@ -64,3 +64,8 @@ class AllUsers(viewsets.ModelViewSet):
 
     def put(self, request, *args, **kwargs):
         return self.update(request, *args, **kwargs)
+
+class PublicTickets(viewsets.ModelViewSet):
+    queryset = Note.objects.filter(domain='Public')
+    permission_classes = [permissions.IsAuthenticated, ]
+    serializer_class = NoteSerializer

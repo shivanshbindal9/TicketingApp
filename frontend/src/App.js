@@ -14,6 +14,8 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import Img from "./components/Img";
 import Users from "./components/Users";
+import PublicTickets from "./components/PublicTickets";
+
 
 let store = createStore(ponyApp, applyMiddleware(thunk));
 
@@ -43,8 +45,9 @@ class RootContainerComponent extends Component {
                     <PrivateRoute exact path="/" component={PonyNote} />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/login" component={Login} />
+                    <Route exact path="/publictickets" component={PublicTickets} />
                     <Route exact path="/img" component={Img} />
-                    <Route exact path="/users" component={Users} /> 
+                    <Route exact path="/users" component={Users} />
                     <Route component={NotFound} />
                 </Switch>
             </BrowserRouter>

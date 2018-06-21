@@ -8,6 +8,7 @@ import {Link} from "react-router-dom";
 class PonyNote extends Component {
 
     componentDidMount() {
+        console.log(this.props.user.username);
         this.props.fetchNotes();
     }
 
@@ -53,6 +54,17 @@ class PonyNote extends Component {
     }
 
     render() {
+
+        let urllink;
+   
+
+        if(this.props.user.is_superuser)
+          {console.log(this.props.user.is_superuser);
+           urllink = '/img';}
+        else
+          { console.log(this.props.user.is_superuser);
+            urllink = '/publictickets';}
+
         return (
             <div>
                 <h2>Welcome to TicketingApp!</h2>
@@ -96,7 +108,7 @@ class PonyNote extends Component {
                     <input type="submit" value="Save Note" />
                 </form>
                 <p>
-                        <Link to="/img">Go to admin view</Link>
+                        <Link to={urllink}>View all tickets</Link>
                 </p>
 
                 <h3>All Tickets</h3>
