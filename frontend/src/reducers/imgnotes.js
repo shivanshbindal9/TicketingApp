@@ -7,7 +7,7 @@ export default function imgnotes(state=initialState, action) {
 
   switch (action.type) {
     case 'FETCH_IMGNOTES':
-      return [...state, ...action.notes]; 
+      return [...action.notes]; 
     
     case 'DELETE_IMGNOTE':
       noteList1.splice(action.index, 1);

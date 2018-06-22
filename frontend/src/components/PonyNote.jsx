@@ -8,9 +8,11 @@ import {Link} from "react-router-dom";
 class PonyNote extends Component {
 
     componentDidMount() {
+               
         console.log(this.props.user.username);
         this.props.fetchNotes();
     }
+
 
     state = {
         text: "",
@@ -64,7 +66,7 @@ class PonyNote extends Component {
         else
           { console.log(this.props.user.is_superuser);
             urllink = '/publictickets';}
-
+        
         return (
             <div>
                 <h2>Welcome to TicketingApp!</h2>
