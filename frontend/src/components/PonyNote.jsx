@@ -1,11 +1,25 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-
+import { Redirect} from 'react-router-dom';
 import {notes, auth} from "../actions";
 import {Link} from "react-router-dom";
+import { Button, Card, Image, Menu, Grid ,Form, Message } from 'semantic-ui-react';
+import { browserHistory } from 'react-router';
 
+const styles = {
+root: {
+ margin: '1%'
+},
+tic:{
+ margin : '3%'
+}
+}
 
 class PonyNote extends Component {
+   constructor(props) {
+    super(props);
+   // this.handleClick = this.handleClick.bind(this);
+}
 
     componentDidMount() {
                
@@ -36,6 +50,13 @@ class PonyNote extends Component {
       });
 
   }
+    handleClick = (id) => {
+    var roomName = id;
+    var m = '/chat/' + roomName + '/';
+//    if(id !== 0){
+//    console.log(id);
+//    return <Redirect to="/chat" />;}
+}
 
     resetForm = () => {
         this.setState({text: "",title:"", updateNoteId: null});
@@ -71,44 +92,69 @@ class PonyNote extends Component {
             <div>
                 <h2>Welcome to TicketingApp!</h2>
                 <hr />
-                <div style={{textAlign: "right"}}>
-                    {this.props.user.username} (<a onClick={this.props.logout}>logout</a>)
-                </div>
+                <Menu fluid fixed="top">
+        <Menu.Menu>
+        <Menu.Item>
+        <div> TicketingApp </div> 
+        </Menu.Item>
+        </Menu.Menu>
+        <Menu.Menu position="right">
+        <Menu.Item onClick={this.props.logout}>
+          {this.props.user.username} (<a onClick={this.props.logout}>logout</a>)
+        </Menu.Item>
+        <Menu.Item onClick={() => browserHistory.push({urllink})}>
+           <Link to={urllink}>View all tickets</Link>
+        </Menu.Item>
+
+        </Menu.Menu>
+        </Menu>
+
 
                 <h3>Add new ticket</h3>
+               <Grid centered style={styles.root} textAlign='center'>
+            <Grid.Column width={8}>
                 <form onSubmit={this.submitNote}>
+                    <fieldset>
+                       <legend> Add OR Edit</legend>
                     <br />
+                    <p> <strong> Title </strong></p>
                     <input
                         value={this.state.title}
                         placeholder="Enter title here..."
                         onChange={(e) => this.setState({title: e.target.value})}
                         required /> <br />
-                    <input
+                    <p><strong> Description </strong></p>
+                    <textarea rows="4" cols="50"
                         value={this.state.text}
                         placeholder="Enter note here..."
                         onChange={(e) => this.setState({text: e.target.value})}
                         required />
                     <br />
-                    <p> Set Domain : </p>
+                    <p><strong> Set Domain :</strong> </p>
                     <fieldset id="group1">
                     <div onChange={this.setDomain.bind(this)}>
                         <input type="radio" value="Public" name="group1" defaultChecked /> Public 
                         <input type="radio" value="Private" name="group1" /> Private
                     </div>
                     </fieldset>
-                    <p> Category </p>
+                    <p><strong> Category</strong> </p>
                     <fieldset id="group2">
                     <div onChange={this.setCategory.bind(this)}>
 
                         <input type="radio" value="Bug Report" name="group2" defaultChecked/>Bug Report
-                        <input type="radio" value="Feature Request" name="group2" />Feature Request <br />
+                        <input type="radio" value="Feature Request" name="group2" />Feature Request 
                         <input type="radio" value="Personnel Account Issue" name="group2" />Personnel Account Issue
                         <input type="radio" value="Other" name="group2" />Other
                    </div> 
                    </fieldset>
-                    <button onClick={this.resetForm}>Reset</button>
-                    <input type="submit" value="Save Note" />
+                   
+                    <Button fluid style={styles.root} onClick={this.resetForm} basic color='purple' size='medium'>Reset</Button>
+                    <Button type="submit" fluid  style={styles.root} value="Save Note" basic color='green' size='medium'> Save Note </Button >
+                </fieldset>
                 </form>
+                </Grid.Column>
+                </Grid>
+              
                 <p>
                         <Link to={urllink}>View all tickets</Link>
                 </p>
@@ -116,17 +162,33 @@ class PonyNote extends Component {
                 <h3>All Tickets</h3>
                 <table>
                     <tbody>
+                    <Card.Group>
                         {this.props.notes.map((note, id) => (
                             <tr key={`note_${note.id}`}>
-                                <td>{note.text}</td>
-                                <td>{note.title}</td>
-                                <td>{note.domain}</td>
-                                <td>{note.category}</td>
-                                <td>{note.statusi}</td>
-                                <td><button onClick={() => this.selectForEdit(id)}>edit</button></td>
-                                <td><button onClick={() => this.props.deleteNote(id)}>delete</button></td>
-                            </tr>
+                     <Card style ={styles.tic} >
+                     <Card.Content>
+                       <Card.Header>{note.title}</Card.Header>
+                            <Card.Meta>{note.category}</Card.Meta>
+                            <Card.Meta>{note.domain}</Card.Meta>
+                            <Card.Meta>{note.statusi}</Card.Meta>
+                             <Card.Description>
+                                <strong>{note.text}</strong>
+                                   </Card.Description>
+                                    </Card.Content>
+                                  <Card.Content extra>
+                                  <div className='ui two buttons'>
+                                 <Button basic color='green' onClick={() => this.selectForEdit(id)}>
+                                      Edit
+                                     </Button>
+                                 <Button basic color='red' onClick={() => this.props.deleteNote(id)}>
+                                    Delete
+                                 </Button>
+                                   </div>
+                                   </Card.Content>
+                                   </Card>
+                              </tr>
                         ))}
+                     </Card.Group>
                     </tbody>
                 </table>
             </div>

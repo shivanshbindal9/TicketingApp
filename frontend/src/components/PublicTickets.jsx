@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
+import { Button, Card, Image, Menu, Grid ,Form, Message } from 'semantic-ui-react';
 import {connect} from 'react-redux';
 import { auth, publictickets} from "../actions"
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 
 console.log("hey");
+const styles = {
+root: {
+ margin: '1%'
+},
+tic:{
+ margin : '3%'
+}
+}
 
 class PublicTickets extends Component {
 
@@ -14,23 +23,49 @@ class PublicTickets extends Component {
 
 
     render() {
+        if (!this.props.user.username) {
+            return <Redirect to="/" />
+        }
+
        return (
            <div>
+             <Menu fluid fixed="top">
+        <Menu.Menu>
+        <Menu.Item>
+        <div> TicketingApp </div>
+        </Menu.Item>
+        </Menu.Menu>
+        <Menu.Menu position="right">
+        <Menu.Item >
+          <Link to="/" > Home </Link>
+        </Menu.Item>
 
-             <h3>All Tickets</h3>
+        </Menu.Menu>
+        </Menu>
+
+
+            <div style={{margin:'3%',marginLeft:'47%' }}> <h3>All Tickets</h3></div>
                 <table>
                     <tbody>
+                    <Card.Group>
                         {this.props.publictickets.map((note, id) => (
                             <tr key={`note_${note.id}`}>
-                                <td>{note.text}</td>
-                                <td>{note.title}</td>
-                                <td>{note.domain}</td>
-                                <td>{note.category}</td>
-                                <td>{note.statusi}</td>
-                                <td>{note.owner}</td>
-                                <td><button onClick={() => this.selectForEdit(id)}>change status</button></td>
-                            </tr>
+                       <Card style ={styles.tic} >
+                            <Card.Content>
+                       <Card.Header>{note.title}</Card.Header>
+                            <Card.Meta>{note.category}</Card.Meta>
+                            <Card.Meta>{note.domain}</Card.Meta>
+                            <Card.Meta>{note.statusi}</Card.Meta>
+                             <Card.Description>
+                                <strong>{note.text}</strong>
+                                   </Card.Description>
+                                    </Card.Content>
+                                   </Card>
+       
+
+                     </tr>
                         ))}
+                    </Card.Group>
                     </tbody>
                  </table>
              </div>
@@ -53,6 +88,7 @@ const mapDispatchToProps = dispatch => {
             console.log("hii");
             dispatch(publictickets.fetchPublicTickets());
         },
+       logout: () => dispatch(auth.logout()),
 } 
 }
 

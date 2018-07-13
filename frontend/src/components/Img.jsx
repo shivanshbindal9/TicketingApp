@@ -2,7 +2,16 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {imgnotes, auth,} from "../actions"
 import {Link} from "react-router-dom";
+import { Button, Card, Image, Menu, Grid ,Form, Message } from 'semantic-ui-react';
 
+const styles = {
+root: {
+ margin: '1%'
+},
+tic:{
+ margin : '3%'
+}
+}
 
 class ImgNote extends Component {
 
@@ -43,9 +52,28 @@ class ImgNote extends Component {
     render() { 
        return (
            <div>
+
+            <Menu fluid fixed="top">
+        <Menu.Menu>
+        <Menu.Item>
+        <div> TicketingApp </div>
+        </Menu.Item>
+        </Menu.Menu>
+        <Menu.Menu position="right">
+        <Menu.Item >
+          <Link to="/" > Home </Link>
+        </Menu.Item>
+
+        </Menu.Menu>
+        </Menu>
+
+            <Grid centered style={styles.root} textAlign='center'>
+            <Grid.Column width={8}>
              <form onSubmit={this.submitNote}>
+           <fieldset>
+                       <legend> Edit</legend>
                  <p> Description : </p>
-                 <input
+                 <textarea rows="4" cols="50"
                      value={this.state.text}
                      placeholder={this.state.text}
                      disabled />
@@ -68,9 +96,12 @@ class ImgNote extends Component {
                         <input type="radio" value="Resolved" name="group2" />Resolved
                    </div> 
                    </fieldset>
-                   <button onClick={this.resetForm}>Reset</button>
-                   <input type="submit" value="Change Note Status" />   
+                   <Button fluid onClick={this.resetForm} basic color='blue' style={styles.root}>Reset</Button>
+                   <Button type="submit" fluid basic color='blue' value="Change Note Status" style={styles.root}> Change note status </Button>   
+             </fieldset>
              </form>
+             </Grid.Column>
+             </Grid>
              <p>
                  <Link to="/users">Go to all users</Link>
              </p>
@@ -78,18 +109,35 @@ class ImgNote extends Component {
              <h3>All Tickets</h3>
                 <table>
                     <tbody>
+                    <Card.Group>
                         {this.props.imgnotes.map((note, id) => (
                             <tr key={`note_${note.id}`}>
-                                <td>{note.text}</td>
-                                <td>{note.title}</td>
-                                <td>{note.domain}</td>
-                                <td>{note.category}</td>
-                                <td>{note.statusi}</td>
-                                <td>{note.owner}</td>
-                                <td><button onClick={() => this.selectForEdit(id)}>change status</button></td>
-                                <td><button onClick={() => this.props.deleteImgNote(id)}>delete</button></td>
+                                <Card style ={styles.tic} >
+                     <Card.Content>
+                       <Card.Header>{note.title}</Card.Header>
+                            <Card.Meta>{note.category}</Card.Meta>
+                            <Card.Meta>{note.domain}</Card.Meta>
+                            <Card.Meta>{note.statusi}</Card.Meta>
+                             <Card.Description>
+                                <strong>{note.text}</strong>
+                                   </Card.Description>
+                                    </Card.Content>
+                                  <Card.Content extra>
+                                  <div className='ui two buttons'>
+                                 <Button basic color='green' onClick={() => this.selectForEdit(id)}>
+                                      Edit Status
+                                     </Button>
+                                 <Button basic color='red' onClick={() => this.props.deleteImgNote(id)}>
+                                    Delete
+                                 </Button>
+                                   </div>
+                                   </Card.Content>
+                                   </Card>
+
+
                             </tr>
                         ))}
+                     </Card.Group>
                     </tbody>
                  </table>
              </div>

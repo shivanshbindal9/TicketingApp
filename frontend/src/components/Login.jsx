@@ -1,9 +1,15 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-
+import { Grid, Form, Button, Image, Message } from 'semantic-ui-react';
 import {Link, Redirect} from "react-router-dom";
 
 import {auth} from "../actions";
+
+const styles = {
+root: {
+ marginTop: '5%'
+}
+}
 
 class Login extends Component {
 
@@ -22,6 +28,8 @@ class Login extends Component {
             return <Redirect to="/" />
         }
         return (
+           <Grid centered style={styles.root} textAlign='center'>
+           <Grid.Column width={6}>
             <form onSubmit={this.onSubmit}>
                 <fieldset>
                     <legend>Login</legend>
@@ -32,27 +40,30 @@ class Login extends Component {
                             ))}
                         </ul>
                     )}
-                    <p>
+                    <Form>
+                    <Form.Field>
+                    
                         <label htmlFor="username">Username</label>
                         <input
                             type="text" id="username"
                             onChange={e => this.setState({username: e.target.value})} />
-                    </p>
-                    <p>
+                    </Form.Field>
+                    <Form.Field>
                         <label htmlFor="password">Password</label>
                         <input
                             type="password" id="password"
                             onChange={e => this.setState({password: e.target.value})} />
-                    </p>
-                    <p>
-                        <button type="submit">Login</button>
-                    </p>
-
-                    <p>
+                    </Form.Field>
+                    
+                   <Button type="submit" fluid size='large'>Login</Button> 
+                    </Form>
+                    <Message>
                         Don't have an account? <Link to="/register">Register</Link>
-                    </p>
+                    </Message>
                 </fieldset>
             </form>
+           </Grid.Column>
+          </Grid>
         )
     }
 }

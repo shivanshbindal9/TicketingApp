@@ -1,9 +1,15 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-
+import { Grid, Form, Button, Image, Message } from 'semantic-ui-react';
 import {Link, Redirect} from "react-router-dom";
 
 import {auth} from "../actions";
+
+const styles = {
+root: {
+ marginTop: '5%'
+}
+}
 
 class Login extends Component {
 
@@ -30,6 +36,8 @@ class Login extends Component {
             return <Redirect to="/" />
         }
         return (
+          <Grid centered style={styles.root} textAlign='center'>
+            <Grid.Column width={6}>
             <form onSubmit={this.onSubmit}>
                 <fieldset>
                     <legend>Register</legend>
@@ -40,34 +48,37 @@ class Login extends Component {
                             ))}
                         </ul>
                     )}
-                    <p>
+                    <Form>
+                      <Form.Field>
                         <label htmlFor="username">Username</label>
                         <input
                             type="text" id="username"
                             onChange={e => this.setState({username: e.target.value})} />
-                    </p>
-                    <p>
+                    </Form.Field>
+                    <Form.Field>
                         <label htmlFor="password">Password</label>
                         <input
                             type="password" id="password"
                             onChange={e => this.setState({password: e.target.value})} />
-                    </p>
-                    <p>
-                        <label htmlFor="password">Password</label>
+                    </Form.Field>
+                    <Form.Field>
+                        <label htmlFor="password">Confirm Password</label>
                         <input
                             type="password" id="password"
                             onChange={e => this.setState({repassword: e.target.value})} />
-                    </p>
+                    </Form.Field>
 
-                    <p>
-                        <button type="submit">Register</button>
-                    </p>
+                    
+                        <Button type="submit" fluid size='large'>Register</Button>
+                    </Form>
 
-                    <p>
+                    <Message>
                         Already have an account? <Link to="/login">Login</Link>
-                    </p>
+                    </Message>
                 </fieldset>
             </form>
+           </Grid.Column>
+          </Grid>
         )
     }
 }
