@@ -10,8 +10,17 @@ root: {
  margin: '1%'
 },
 tic:{
- margin : '3%'
-}
+ margin : '3%',
+ background:'linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%)',
+ color:'#f3f3f3',
+ boxShadow: '10px 10px 5px #b7c8cc'
+
+},
+navbar:{
+backgroundColor: 'black',
+color:'white'
+},
+
 }
 
 class PublicTickets extends Component {
@@ -29,9 +38,9 @@ class PublicTickets extends Component {
 
        return (
            <div>
-             <Menu fluid fixed="top">
+             <Menu fluid fixed="top" style={styles.navbar}>
         <Menu.Menu>
-        <Menu.Item>
+        <Menu.Item style={styles.navbar}>
         <div> TicketingApp </div>
         </Menu.Item>
         </Menu.Menu>

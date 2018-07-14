@@ -9,8 +9,23 @@ root: {
  margin: '1%'
 },
 tic:{
- margin : '3%'
+ margin : '3%',
+  background:'linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%)',
+ color:'#f3f3f3',
+ boxShadow: '10px 10px 5px #b7c8cc'
+
+},
+navbar:{
+backgroundColor: 'black',
+color:'white'
+},
+gen:{
+background:'linear-gradient(to bottom right, #0fb8ad 0% ,#215ca0)',
+boxShadow: '0 6px 20px 0 rgba(0, 0, 0, 0.79)',
+borderRadius : '5%',
+borderColor : '#1158aa'
 }
+
 }
 
 class ImgNote extends Component {
@@ -53,9 +68,9 @@ class ImgNote extends Component {
        return (
            <div>
 
-            <Menu fluid fixed="top">
+            <Menu fluid fixed="top" style={styles.navbar} >
         <Menu.Menu>
-        <Menu.Item>
+        <Menu.Item style={styles.navbar}>
         <div> TicketingApp </div>
         </Menu.Item>
         </Menu.Menu>
@@ -63,6 +78,13 @@ class ImgNote extends Component {
         <Menu.Item >
           <Link to="/" > Home </Link>
         </Menu.Item>
+        <Menu.Item >
+          <Link to="/users" > All Users </Link>
+        </Menu.Item>
+        <Menu.Item  style={styles.navbar}>
+          U are admin
+        </Menu.Item>
+
 
         </Menu.Menu>
         </Menu>
@@ -70,24 +92,24 @@ class ImgNote extends Component {
             <Grid centered style={styles.root} textAlign='center'>
             <Grid.Column width={8}>
              <form onSubmit={this.submitNote}>
-           <fieldset>
-                       <legend> Edit</legend>
-                 <p> Description : </p>
+           <fieldset style={styles.gen}>
+                       <legend style={{ color:'white'}}> Edit</legend>
+                 <p style={{ color:'white'}}><b> Description :</b> </p>
                  <textarea rows="4" cols="50"
                      value={this.state.text}
                      placeholder={this.state.text}
                      disabled />
                  <br /> 
-                 <p> Current Status : </p>
+                 <p style={{ color:'white'}}><b> Current Status :</b> </p>
                  <input
                      value={this.state.statusi}
                      placeholder={this.state.statusi}
                      disabled />
                   <br />
 
-                  <p> Update To  : </p>
+                  <p style={{ color:'white'}}><b> Update To  :</b> </p>
                   <fieldset id="group2">
-                    <div onChange={this.setCategory.bind(this)}>
+                    <div onChange={this.setCategory.bind(this)} style={{ color:'white'}}>
                         <input type="radio" value="Received" name="group2" defaultChecked/>Received
 
                         <input type="radio" value="Under Process" name="group2" /> Under Process
@@ -96,8 +118,8 @@ class ImgNote extends Component {
                         <input type="radio" value="Resolved" name="group2" />Resolved
                    </div> 
                    </fieldset>
-                   <Button fluid onClick={this.resetForm} basic color='blue' style={styles.root}>Reset</Button>
-                   <Button type="submit" fluid basic color='blue' value="Change Note Status" style={styles.root}> Change note status </Button>   
+                   <Button fluid onClick={this.resetForm} basic color='black' style={styles.root}>Reset</Button>
+                   <Button type="submit" fluid basic color='black' value="Change Note Status" style={styles.root}> Change note status </Button>   
              </fieldset>
              </form>
              </Grid.Column>

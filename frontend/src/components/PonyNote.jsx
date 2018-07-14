@@ -8,10 +8,23 @@ import { browserHistory } from 'react-router';
 
 const styles = {
 root: {
- margin: '1%'
+ margin: '1%',
 },
 tic:{
- margin : '3%'
+ margin : '3%',
+ background:'linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%)',
+ color:'#f3f3f3',
+ boxShadow: '10px 10px 5px #b7c8cc'
+},
+navbar:{
+backgroundColor: 'black',
+color:'white'
+},
+gen:{
+background:'linear-gradient(to bottom right, #0fb8ad 0% ,#215ca0)',
+boxShadow: '0 6px 20px 0 rgba(0, 0, 0, 0.79)',
+borderRadius : '5%',
+borderColor : '#1158aa'
 }
 }
 
@@ -92,14 +105,14 @@ class PonyNote extends Component {
             <div>
                 <h2>Welcome to TicketingApp!</h2>
                 <hr />
-                <Menu fluid fixed="top">
+                <Menu fluid fixed="top" style={styles.navbar}>
         <Menu.Menu>
-        <Menu.Item>
+        <Menu.Item style={styles.navbar}>
         <div> TicketingApp </div> 
         </Menu.Item>
         </Menu.Menu>
         <Menu.Menu position="right">
-        <Menu.Item onClick={this.props.logout}>
+        <Menu.Item onClick={this.props.logout} style={styles.navbar}>
           {this.props.user.username} (<a onClick={this.props.logout}>logout</a>)
         </Menu.Item>
         <Menu.Item onClick={() => browserHistory.push({urllink})}>
@@ -114,32 +127,32 @@ class PonyNote extends Component {
                <Grid centered style={styles.root} textAlign='center'>
             <Grid.Column width={8}>
                 <form onSubmit={this.submitNote}>
-                    <fieldset>
-                       <legend> Add OR Edit</legend>
+                    <fieldset style={styles.gen}>
+                       <legend style={{ color:'white'}}> Add OR Edit</legend>
                     <br />
-                    <p> <strong> Title </strong></p>
+                    <p style={{ color:'white'}}> <strong> Title </strong></p>
                     <input
                         value={this.state.title}
                         placeholder="Enter title here..."
                         onChange={(e) => this.setState({title: e.target.value})}
                         required /> <br />
-                    <p><strong> Description </strong></p>
+                    <p style={{ color:'white'}}><strong> Description </strong></p>
                     <textarea rows="4" cols="50"
                         value={this.state.text}
                         placeholder="Enter note here..."
                         onChange={(e) => this.setState({text: e.target.value})}
                         required />
                     <br />
-                    <p><strong> Set Domain :</strong> </p>
+                    <p style={{ color:'white'}}><strong> Set Domain :</strong> </p>
                     <fieldset id="group1">
-                    <div onChange={this.setDomain.bind(this)}>
+                    <div onChange={this.setDomain.bind(this)} style={{ color:'white'}}>
                         <input type="radio" value="Public" name="group1" defaultChecked /> Public 
                         <input type="radio" value="Private" name="group1" /> Private
                     </div>
                     </fieldset>
-                    <p><strong> Category</strong> </p>
+                    <p style={{ color:'white'}}><strong> Category</strong> </p>
                     <fieldset id="group2">
-                    <div onChange={this.setCategory.bind(this)}>
+                    <div onChange={this.setCategory.bind(this)} style={{ color:'white'}}>
 
                         <input type="radio" value="Bug Report" name="group2" defaultChecked/>Bug Report
                         <input type="radio" value="Feature Request" name="group2" />Feature Request 
@@ -148,8 +161,8 @@ class PonyNote extends Component {
                    </div> 
                    </fieldset>
                    
-                    <Button fluid style={styles.root} onClick={this.resetForm} basic color='purple' size='medium'>Reset</Button>
-                    <Button type="submit" fluid  style={styles.root} value="Save Note" basic color='green' size='medium'> Save Note </Button >
+                    <Button fluid style={styles.root} onClick={this.resetForm} color='purple' size='medium'>Reset</Button>
+                    <Button type="submit" fluid  style={styles.root} value="Save Note" color='green' size='medium'> Save Note </Button >
                 </fieldset>
                 </form>
                 </Grid.Column>
