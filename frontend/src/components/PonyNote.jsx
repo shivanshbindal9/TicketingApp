@@ -11,7 +11,7 @@ root: {
  margin: '1%',
 },
 tic:{
- margin : '3%',
+ margin:'20px',
  background:'linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%)',
  color:'#f3f3f3',
  boxShadow: '10px 10px 5px #b7c8cc'
@@ -72,7 +72,7 @@ class PonyNote extends Component {
 }
 
     resetForm = () => {
-        this.setState({text: "",title:"", updateNoteId: null});
+        this.setState({text: "",title:"", updateNoteId: null, category: "Bug Report",domain: "Public"});
     }
 
     selectForEdit = (id) => {
@@ -146,18 +146,18 @@ class PonyNote extends Component {
                     <p style={{ color:'white'}}><strong> Set Domain :</strong> </p>
                     <fieldset id="group1">
                     <div onChange={this.setDomain.bind(this)} style={{ color:'white'}}>
-                        <input type="radio" value="Public" name="group1" defaultChecked /> Public 
-                        <input type="radio" value="Private" name="group1" /> Private
+                        <input type="radio" value="Public" name="group1" checked={this.state.domain === 'Public'} /> Public 
+                        <input type="radio" value="Private" name="group1" checked={this.state.domain==='Private'} /> Private
                     </div>
                     </fieldset>
                     <p style={{ color:'white'}}><strong> Category</strong> </p>
                     <fieldset id="group2">
                     <div onChange={this.setCategory.bind(this)} style={{ color:'white'}}>
 
-                        <input type="radio" value="Bug Report" name="group2" defaultChecked/>Bug Report
-                        <input type="radio" value="Feature Request" name="group2" />Feature Request 
-                        <input type="radio" value="Personnel Account Issue" name="group2" />Personnel Account Issue
-                        <input type="radio" value="Other" name="group2" />Other
+		        <input type="radio" value="Bug Report" name="group2" checked={this.state.category === 'Bug Report'}/>Bug Report
+                        <input type="radio" value="Feature Request" name="group2"  checked={this.state.category === 'Feature Request'}/>Feature Request 
+                        <input type="radio" value="Personnel Account Issue" name="group2"  checked={this.state.category === 'Personnel Account Issue'}/>Personnel Account Issue
+                        <input type="radio" value="Other" name="group2"  checked={this.state.category === 'Other'}/>Other
                    </div> 
                    </fieldset>
                    
