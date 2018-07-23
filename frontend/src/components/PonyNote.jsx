@@ -118,7 +118,9 @@ class PonyNote extends Component {
         <Menu.Item onClick={() => browserHistory.push({urllink})}>
            <Link to={urllink}>View all tickets</Link>
         </Menu.Item>
-
+        <Menu.Item >
+          <Link to="/users" > All Users </Link>
+        </Menu.Item>
         </Menu.Menu>
         </Menu>
 

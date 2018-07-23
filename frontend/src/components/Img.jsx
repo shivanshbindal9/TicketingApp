@@ -54,7 +54,7 @@ class ImgNote extends Component {
         
 }
     resetForm = () => {
-        this.setState({text: "", updateNoteId: null});
+        this.setState({text: "", updateNoteId: null, statusi : "Received"});
 }
    
     submitNote = (e) => {
@@ -110,12 +110,12 @@ class ImgNote extends Component {
                   <p style={{ color:'white'}}><b> Update To  :</b> </p>
                   <fieldset id="group2">
                     <div onChange={this.setCategory.bind(this)} style={{ color:'white'}}>
-                        <input type="radio" value="Received" name="group2" defaultChecked/>Received
+                        <input type="radio" value="Received" name="group2" checked={this.state.statusi==='Received'}/>Received
 
-                        <input type="radio" value="Under Process" name="group2" /> Under Process
-                        <input type="radio" value="Already Working" name="group2" />Already working <br />
-                        <input type="radio" value="Infeasible" name="group2" />Infeasible
-                        <input type="radio" value="Resolved" name="group2" />Resolved
+                        <input type="radio" value="Under Process" name="group2" checked={this.state.statusi==='Under Process'}/> Under Process
+                        <input type="radio" value="Already Working" name="group2" checked={this.state.statusi==='Already Working'}/>Already working <br />
+                        <input type="radio" value="Infeasible" name="group2" checked={this.state.statusi==='Infeasible'}/>Infeasible
+                        <input type="radio" value="Resolved" name="group2" checked={this.state.statusi==='Resolved'}/>Resolved
                    </div> 
                    </fieldset>
                    <Button fluid onClick={this.resetForm} basic color='black' style={styles.root}>Reset</Button>

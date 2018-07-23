@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
+import {Link} from "react-router-dom";
 import {connect} from 'react-redux';
 import {allusers, auth,} from "../actions"
+import { Button, Card, Image, Menu, Grid ,Form, Message } from 'semantic-ui-react';
+
+const styles = {
+navbar:{
+backgroundColor: 'black',
+color:'white'
+},
+}
 
 class AllUsers extends Component{
    
@@ -49,6 +58,28 @@ class AllUsers extends Component{
      return (
 
            <div>
+             <Menu fluid fixed="top" style={styles.navbar} >
+        <Menu.Menu>
+        <Menu.Item style={styles.navbar}>
+        <div> TicketingApp </div>
+        </Menu.Item>
+        </Menu.Menu>
+        <Menu.Menu position="right">
+        <Menu.Item >
+          <Link to="/" > Home </Link>
+        </Menu.Item>
+        <Menu.Item >
+          <Link to="/img" > All Tickets </Link>
+        </Menu.Item>
+        <Menu.Item  style={styles.navbar}>
+          U are admin
+        </Menu.Item>
+
+
+        </Menu.Menu>
+        </Menu>
+             <div> Ticketing App </div> 
+             <div style={{ margin: " 40px"}}>
              <form onSubmit={this.submitNote}>
                   User Name : 
                  <input
@@ -68,7 +99,7 @@ class AllUsers extends Component{
                    <br />
                    <button onClick={this.resetForm}>Reset</button>
                    <input type="submit" value="Apply Changes" />   
-</form>
+</form> </div>
 
              <h3>UserList is here</h3>
                 <table>
