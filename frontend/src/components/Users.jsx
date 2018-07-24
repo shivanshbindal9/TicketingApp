@@ -114,7 +114,7 @@ class AllUsers extends Component{
                         {this.props.allusers.map((user, id) => (
                             <tr key={`user_${user.id}`}>
                                 <td>{user.username}</td>
-                               
+                                <td><input type="checkbox" checked={user.is_superuser} /> </td>
                                 <td>{user.is_active}</td>
                                 <td>{user.date_joined}</td>
                                
