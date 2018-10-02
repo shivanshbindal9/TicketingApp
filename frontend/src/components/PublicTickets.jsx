@@ -1,24 +1,23 @@
 import React, { Component } from 'react';
 import { Button, Card, Image, Menu, Grid ,Form, Message } from 'semantic-ui-react';
 import {connect} from 'react-redux';
-import { auth, publictickets} from "../actions"
+import { auth, publictickets } from "../actions"
 import {Link, Redirect} from "react-router-dom";
 
-console.log("hey");
 const styles = {
 root: {
  margin: '1%'
 },
-tic:{
- margin : '20px',
- background:'linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%)',
- color:'#f3f3f3',
- boxShadow: '10px 10px 5px #b7c8cc'
+tic: {
+  margin : '20px',
+  background:'linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%)',
+  color:'#f3f3f3',
+  boxShadow: '10px 10px 5px #b7c8cc'
 
 },
-navbar:{
-backgroundColor: 'black',
-color:'white'
+navbar: {
+  backgroundColor: 'black',
+  color:'white'
 },
 
 }
