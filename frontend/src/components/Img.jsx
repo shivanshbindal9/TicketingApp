@@ -6,11 +6,7 @@ import { Button, Card, Image, Menu, Grid, Form, Message, Input, TextArea } from 
 
 const styles = {
     tic: {
-        margin: '20px',
-        background: 'linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%)',
-        color: '#f3f3f3',
-        boxShadow: '10px 10px 5px #b7c8cc'
-
+        margin: '22px',
     },
     navbar: {
         backgroundColor: 'black',
@@ -35,6 +31,7 @@ class ImgNote extends Component {
         statusi: "Received",
         updateNoteId: null,
         text: "",
+        title: "",
     }
     setCategory(event, { value }) {
         this.setState({
@@ -46,11 +43,11 @@ class ImgNote extends Component {
 
     selectForEdit = (id) => {
         let note = this.props.imgnotes[id];
-        this.setState({ statusi: note.statusi, text: note.text, updateNoteId: id, });
+        this.setState({ statusi: note.statusi, text: note.text, updateNoteId: id, title: note.title });
 
     }
     resetForm = () => {
-        this.setState({ text: "", updateNoteId: null, statusi: "Received" });
+        this.setState({ text: "", updateNoteId: null, statusi: "Received", title: "" });
     }
 
     submitNote = (e) => {
@@ -169,44 +166,44 @@ class ImgNote extends Component {
                         </Form>
                     </Grid.Column>
                 </Grid>
-                {/* <p>
-                    <Link to="/users">Go to all users</Link>
-                </p> */}
-
-                <h3>All Tickets</h3>
-                <table>
-                    <tbody>
-                        <Card.Group>
-                            {this.props.imgnotes.map((note, id) => (
-                                <tr key={`note_${note.id}`}>
-                                    <Card style={styles.tic} >
-                                        <Card.Content>
-                                            <Card.Header>{note.title}</Card.Header>
-                                            <Card.Meta>{note.category}</Card.Meta>
-                                            <Card.Meta>{note.domain}</Card.Meta>
-                                            <Card.Meta>{note.statusi}</Card.Meta>
-                                            <Card.Description>
-                                                <strong>{note.text}</strong>
-                                            </Card.Description>
-                                        </Card.Content>
-                                        <Card.Content extra>
-                                            <div className='ui two buttons'>
-                                                <Button basic color='green' onClick={() => this.selectForEdit(id)}>
-                                                    Edit Status
+                <Grid centered>
+                    <Grid.Column width={10}>
+                        <h3>All Tickets</h3>
+                        <table>
+                            <tbody>
+                                <Card.Group>
+                                    {this.props.imgnotes.map((note, id) => (
+                                        <tr key={`note_${note.id}`}>
+                                            <Card style={styles.tic} >
+                                                <Card.Content>
+                                                    <Card.Header>{note.title}</Card.Header>
+                                                    <Card.Meta>{note.category}</Card.Meta>
+                                                    <Card.Meta>{note.domain}</Card.Meta>
+                                                    <Card.Meta>{note.statusi}</Card.Meta>
+                                                    <Card.Description>
+                                                        <strong>{note.text}</strong>
+                                                    </Card.Description>
+                                                </Card.Content>
+                                                <Card.Content extra>
+                                                    <div className='ui two buttons'>
+                                                        <Button basic color='green' onClick={() => this.selectForEdit(id)}>
+                                                            Edit Status
                                      </Button>
-                                                <Button basic color='red' onClick={() => this.props.deleteImgNote(id)}>
-                                                    Delete
+                                                        <Button basic color='red' onClick={() => this.props.deleteImgNote(id)}>
+                                                            Delete
                                  </Button>
-                                            </div>
-                                        </Card.Content>
-                                    </Card>
+                                                    </div>
+                                                </Card.Content>
+                                            </Card>
 
 
-                                </tr>
-                            ))}
-                        </Card.Group>
-                    </tbody>
-                </table>
+                                        </tr>
+                                    ))}
+                                </Card.Group>
+                            </tbody>
+                        </table>
+                    </Grid.Column>
+                </Grid>
             </div>
         )
     }

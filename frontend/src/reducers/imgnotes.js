@@ -2,17 +2,17 @@ const initialState = [];
 
 
 
-export default function imgnotes(state=initialState, action) {
+export default function imgnotes(state = initialState, action) {
   let noteList1 = state.slice();
 
   switch (action.type) {
     case 'FETCH_IMGNOTES':
-      return [...action.notes]; 
-    
+      return [...action.notes];
+
     case 'DELETE_IMGNOTE':
       noteList1.splice(action.index, 1);
       return noteList1;
-    
+
     case 'UPDATE_IMGNOTE':
       let noteToUpdate = noteList1[action.index]
       noteToUpdate.statusi = action.note.statusi;
@@ -21,4 +21,5 @@ export default function imgnotes(state=initialState, action) {
 
     default:
       return state;
-}}
+  }
+}
