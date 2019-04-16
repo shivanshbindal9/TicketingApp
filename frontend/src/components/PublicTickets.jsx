@@ -56,7 +56,7 @@ class PublicTickets extends Component {
                                 <Card.Group>
                                     {this.props.publictickets.map((note, id) => (
                                         <tr key={`note_${note.id}`}>
-                                            <Card style={styles.tic} >
+                                            <Card style={styles.tic} color="purple">
                                                 <Card.Content>
                                                     <Card.Header>{note.title}</Card.Header>
                                                     <Card.Meta>{note.category}</Card.Meta>
