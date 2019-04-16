@@ -4,7 +4,7 @@ This app is a query based platform in which tickets are issued for each query an
 
 # Steps for installation
 
-```git clone http://github.com/shivanshbindal9/TicketingApp```<br/>
+```git clone http://github.com/shivanshbindal9/TicketingApp.git```<br/>
 `cd TicketingApp`<br/>
 Create a virtual environment<br/>
 `virtualenv venv`<br/>
