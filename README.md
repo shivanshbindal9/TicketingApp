@@ -5,15 +5,16 @@ This app is a query based platform in which tickets are issued for each query an
 # Steps for installation
 
 ```git clone http://github.com/shivanshbindal9/TicketingApp.git```<br/>
-`cd TicketingApp`<br/>
-Create a virtual environment<br/>
+`cd TicketingApp`<br/><br/>
+<b>Create and activate virtual environment</b><br/>
 `virtualenv venv`<br/>
-`source venv/bin/activate`<br/>
+`source venv/bin/activate`<br/><br/>
+<b>Install requirements and dependencies</b><br/>
 `pip install requirements.txt`<br/>
 `cd frontend`<br/>
 `yarn`<br/>
 <br/>
-Now all the requirements are installed <br/>
+Now all the requirements and dependencies are installed <br/>
 <br/>
 # Steps to start server<br/>
 
