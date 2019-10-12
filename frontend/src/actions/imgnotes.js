@@ -29,7 +29,6 @@ export const fetchImgNotes = () => {
     }
 }
 
-
 export const deleteImgNote = index => {
     return (dispatch, getState) => {
 

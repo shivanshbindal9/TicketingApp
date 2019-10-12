@@ -129,5 +129,4 @@ export const deleteNote = index => {
                     throw res.data;
                 }
             })
-    }
-}
+    }}
