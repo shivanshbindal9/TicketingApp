@@ -18,7 +18,6 @@ import PublicTickets from "./components/PublicTickets";
 import Comments from "./components/Comments";
 
 
-
 let store = createStore(ponyApp, applyMiddleware(thunk));
 
 class RootContainerComponent extends Component {
