@@ -1,7 +1,5 @@
 const initialState = [];
 
-
-
 export default function imgnotes(state = initialState, action) {
   let noteList1 = state.slice();
 
