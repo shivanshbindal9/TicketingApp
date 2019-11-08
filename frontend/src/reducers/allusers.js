@@ -1,7 +1,5 @@
 const initialState = [];
 
-
-
 export default function allusers(state = initialState, action) {
   let noteList1 = state.slice();
 

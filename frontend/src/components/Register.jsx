@@ -7,7 +7,7 @@ import {auth} from "../actions";
 
 const styles = {
 root: {
- marginTop: '5%'
+ marginTop: '10%'
 }
 }
 
